@@ -1,0 +1,109 @@
+# Compiled source
+*.o
+*.Plo
+*.Po
+*.lo
+*.la
+*.a
+*.os
+*.pyc
+*.so
+*.pc
+*.pyd
+*.def
+*.dll
+*.exe
+*.dylib
+dolfin/libdolfin.so*
+
+# FFC generated code in library
+dolfin/ale/Poisson*D.h
+
+# Log files
+*.log
+
+# Install directory
+/local
+/local.*
+
+# SWIG generated files
+dolfin/swig/**/**/*.py
+dolfin/swig/**/**/*.h
+dolfin/swig/**/**/*.cc
+dolfin/swig/**/**/*.cxx
+dolfin/swig/**/**/module.i
+dolfin/swig/**/**/dependencies.txt
+swigimportinfo.py
+
+# Documentation
+docstrings.i
+
+# Configuration files
+dolfin.conf
+dolfin-version
+dolfin-config.cmake
+DOLFINConfig.cmake
+DOLFINConfigVersion.cmake
+UseDOLFIN.cmake
+dolfin-config-version.cmake
+
+# Demos and tests
+demo_*
+test_*
+build_demo.*
+test/unit/mesh/{cpp,python}/*.{xml,m}
+test/unit/parameter/{cpp,python}/*.{xml,xml.gz}
+bench/**/**/cpp/forms/*.h
+bench/**/**/cpp/*.h
+test/unit/**/python/*.xml
+test/unit/**/cpp/*.xml
+
+# FFC generated demo files
+demo/**/**/cpp/*.h
+demo/pde/cahn-hilliard/cpp/CahnHilliard2D.cpp
+demo/pde/cahn-hilliard/cpp/CahnHilliard3D.cpp
+
+# QT generated code
+moc_*
+
+# Temporaries
+*~
+
+# Compressed files
+*.xz
+*.gz
+*.zs-old
+
+# Data files
+*.pvd
+*.pvtu
+*.vtu
+*.h5
+*.xdmf
+*.bin
+
+# CMake and Make file
+CMakeLists.txt
+!/CMakeLists.txt
+!dolfin/CMakeLists.txt
+!bench/CMakeLists.txt
+!dolfin/swig/CMakeLists.txt
+!doc/CMakeLists.txt
+!demo/CMakeLists.txt
+!test/CMakeLists.txt
+
+
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+cmake_uninstall.cmake
+Makefile
+install_manifest.txt
+
+# Local build files
+/build
+/build.*/
+
+# OS X files
+.DS_Store
+.DS_Store?
