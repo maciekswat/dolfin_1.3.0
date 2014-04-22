@@ -36,21 +36,36 @@ endif()
 
 add_definitions(${DOLFIN_PYTHON_DEFINITIONS})
 
+
 # Check that swig interface is generated, otherwise re-generate it
 if (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/modules)
   message(STATUS "")
   message(STATUS "Generating SWIG interface.")
   message(STATUS "--------------------------")
+  if (MINGW)
+    message("${DOLFIN_SOURCE_DIR}/cmake/scripts/generate-swig-interface="  ${DOLFIN_SOURCE_DIR}/cmake/scripts/generate-swig-interface)
+  execute_process(
+    COMMAND ${PYTHON_EXECUTABLE} ${DOLFIN_SOURCE_DIR}/cmake/scripts/generate-swig-interface ${CMAKE_BINARY_DIR}
+    WORKING_DIRECTORY ${DOLFIN_SOURCE_DIR} OUTPUT_FILE ${CMAKE_BINARY_DIR}/gen.out ERROR_FILE ${CMAKE_BINARY_DIR}/gen.err)    
+  execute_process(
+    COMMAND ${PYTHON_EXECUTABLE} ${DOLFIN_SOURCE_DIR}/cmake/scripts/generate-swig-docstrings ${CMAKE_BINARY_DIR}
+    WORKING_DIRECTORY ${DOLFIN_SOURCE_DIR} OUTPUT_FILE ${CMAKE_BINARY_DIR}/gendoc.out ERROR_FILE ${CMAKE_BINARY_DIR}/gendoc.err)      
+  else()
   execute_process(
     COMMAND ${PYTHON_EXECUTABLE} ${DOLFIN_SOURCE_DIR}/cmake/scripts/generate-swig-interface ${CMAKE_BINARY_DIR}
     WORKING_DIRECTORY ${DOLFIN_SOURCE_DIR})
   execute_process(
     COMMAND ${PYTHON_EXECUTABLE} ${DOLFIN_SOURCE_DIR}/cmake/scripts/generate-swig-docstrings ${CMAKE_BINARY_DIR}
-    WORKING_DIRECTORY ${DOLFIN_SOURCE_DIR})
+    WORKING_DIRECTORY ${DOLFIN_SOURCE_DIR})  
+  endif()
+  
+
 endif()
 
 # Get combined modules
 file(GLOB COMBINED_MODULES RELATIVE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/modules/*)
+
+message("COMBINED_MODULES=" ${COMBINED_MODULES})
 
 # Sort and reverse the list so la combined module comes early
 list(SORT COMBINED_MODULES)

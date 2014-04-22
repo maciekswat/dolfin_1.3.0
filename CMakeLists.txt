@@ -15,8 +15,41 @@ set(DOLFIN_VERSION "${DOLFIN_VERSION_MAJOR}.${DOLFIN_VERSION_MINOR}.${DOLFIN_VER
 #------------------------------------------------------------------------------
 # Get GIT changeset, if available
 
+SET(EIGEN3_INCLUDE_DIR "D:/source-46/eigen-3.2.1/include/eigen3")
+SET(LIBXML2_INCLUDE_DIR  "d:/source-46/libxml2-46/include/libxml2")
+SET(LIBXML2_LIBRARIES "d:/source-46/libxml2-46/lib/libxml2.a")
+
+SET(AMD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+SET(AMD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libamd.a")
+
+SET(AMD_FOUND TRUE)
+SET(AMD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+SET(AMD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libamd.a")
+
+SET(UMFPACK_FOUND TRUE)
+SET(UMFPACK_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+SET(UMFPACK_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libumfpack.a")
+
+SET(CHOLMOD_FOUND TRUE)
+SET(CHOLMOD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+SET(CHOLMOD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libcholmod.a")
+
+# adding UMFPACK dependencies
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libamd.a")
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libcholmod.a")
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libcolamd.a")
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libSuiteSparse_config.a")
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libamd.a")
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/lapack_blas_windows/libblas.lib") 
+SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/lapack_blas_windows/liblapack.lib") 
+
+SET(UMFPACK_DIR "d:/source-46/SuiteSparseProject")
+
+
+
 # Check for git
 find_program(GIT_FOUND git)
+
 
 if (GIT_FOUND)
   # Get the commit hash of the working branch
@@ -68,24 +101,27 @@ option(DOLFIN_SKIP_BUILD_TESTS "Skip build tests." OFF)
 # List optional packages
 set(OPTIONAL_PACKAGES "")
 list(APPEND OPTIONAL_PACKAGES "OpenMP")
-list(APPEND OPTIONAL_PACKAGES "MPI")
-list(APPEND OPTIONAL_PACKAGES "PETSc")
-list(APPEND OPTIONAL_PACKAGES "PETSc4py")
-list(APPEND OPTIONAL_PACKAGES "SLEPc")
-list(APPEND OPTIONAL_PACKAGES "TAO")
-list(APPEND OPTIONAL_PACKAGES "Trilinos")
+# list(APPEND OPTIONAL_PACKAGES "MPI")
+# list(APPEND OPTIONAL_PACKAGES "PETSc")
+# list(APPEND OPTIONAL_PACKAGES "PETSc4py")
+# list(APPEND OPTIONAL_PACKAGES "SLEPc")
+# list(APPEND OPTIONAL_PACKAGES "TAO")
+# list(APPEND OPTIONAL_PACKAGES "Trilinos")
 list(APPEND OPTIONAL_PACKAGES "UMFPACK")
 list(APPEND OPTIONAL_PACKAGES "CHOLMOD")
-list(APPEND OPTIONAL_PACKAGES "PaStiX")
-list(APPEND OPTIONAL_PACKAGES "SCOTCH")
-list(APPEND OPTIONAL_PACKAGES "ParMETIS")
-list(APPEND OPTIONAL_PACKAGES "CGAL")
-list(APPEND OPTIONAL_PACKAGES "zlib")
+# list(APPEND OPTIONAL_PACKAGES "PaStiX")
+# list(APPEND OPTIONAL_PACKAGES "SCOTCH")
+# list(APPEND OPTIONAL_PACKAGES "ParMETIS")
+# list(APPEND OPTIONAL_PACKAGES "CGAL")
+# list(APPEND OPTIONAL_PACKAGES "zlib")
 list(APPEND OPTIONAL_PACKAGES "Python")
-list(APPEND OPTIONAL_PACKAGES "Sphinx")
-list(APPEND OPTIONAL_PACKAGES "HDF5")
-list(APPEND OPTIONAL_PACKAGES "VTK")
-list(APPEND OPTIONAL_PACKAGES "QT")
+# list(APPEND OPTIONAL_PACKAGES "Sphinx")
+# list(APPEND OPTIONAL_PACKAGES "HDF5")
+# list(APPEND OPTIONAL_PACKAGES "VTK")
+# list(APPEND OPTIONAL_PACKAGES "QT")
+
+
+
 
 # Add options
 foreach (OPTIONAL_PACKAGE ${OPTIONAL_PACKAGES})
@@ -353,16 +389,19 @@ if (DOLFIN_ENABLE_MPI AND MPI_C_FOUND)
 endif()
 
 # Check for UMFPACK
-if (DOLFIN_ENABLE_UMFPACK)
-  find_package(AMD QUIET)
-  find_package(BLAS QUIET)
-  find_package(UMFPACK QUIET)
-endif()
+# if (DOLFIN_ENABLE_UMFPACK)
+  # find_package(AMD)
+  # find_package(BLAS)
+  # find_package(UMFPACK )
+  # find_package(AMD QUIET)
+  # find_package(BLAS QUIET)
+  # find_package(UMFPACK QUIET)
+# endif()
 
 # Check for CHOLMOD
-if (DOLFIN_ENABLE_CHOLMOD)
-  find_package(CHOLMOD QUIET)
-endif()
+# if (DOLFIN_ENABLE_CHOLMOD)
+  # find_package(CHOLMOD QUIET)
+# endif()
 
 # Check for HDF5
 if (DOLFIN_ENABLE_HDF5)

@@ -333,7 +333,12 @@ if (PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND AND SWIG_FOUND)
   endif()
 
   # If suitble UFC SWIG extension is found, add SWIG subdirectory
+  message("UFC VERSION" ${UFC_SWIGVERSION})
+  message("SWIG VERSION" ${SWIG_VERSION})
+  message("UFC_MODULE_NOT_FOUND" ${UFC_MODULE_NOT_FOUND})
+  
   if (NOT UFC_MODULE_NOT_FOUND AND ("${SWIG_VERSION}" STREQUAL "${UFC_SWIGVERSION}"))
+	message("ADDING SWIG")
     add_subdirectory(swig)
   endif()
 
@@ -410,6 +415,9 @@ install(FILES ${CMAKE_BINARY_DIR}/dolfin.pc
 get_target_property(DOLFIN_LIBRARY_LOCATION dolfin LOCATION)
 get_filename_component(DOLFIN_LIBRARY_FILENAME ${DOLFIN_LIBRARY_LOCATION} NAME)
 set(DOLFIN_LIBRARY "${CMAKE_INSTALL_PREFIX}/${DOLFIN_LIB_DIR}/${DOLFIN_LIBRARY_FILENAME}")
+
+set(PYTHON_INCLUDE_DIRS "c:/Python27/include")
+set(NUMPY_INCLUDE_DIR "c:/Python27/lib/site-packages/numpy/core/include")
 
 configure_file(${DOLFIN_CMAKE_DIR}/templates/DOLFINConfig.cmake.in
   ${CMAKE_BINARY_DIR}/dolfin/DOLFINConfig.cmake @ONLY)
