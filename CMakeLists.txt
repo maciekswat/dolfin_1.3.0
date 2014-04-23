@@ -13,41 +13,52 @@ set(DOLFIN_VERSION_MICRO "0")
 set(DOLFIN_VERSION "${DOLFIN_VERSION_MAJOR}.${DOLFIN_VERSION_MINOR}.${DOLFIN_VERSION_MICRO}")
 
 #------------------------------------------------------------------------------
-# Get GIT changeset, if available
 if (MINGW)
-    SET (BOOST_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR})
-    SET(DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR "D:/dolfin_deps_git")
+        # SET (BOOST_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR})
+        set(DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR "D:/dolfin_deps_git" CACHE PATH "Third party dependencies directory")
+        message("INSIDE MINGW section")
+        # SET(DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR "D:/dolfin_deps_git")
 
-    SET(EIGEN3_INCLUDE_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/eigen3)
-    SET(LIBXML2_INCLUDE_DIR  ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/libxml2)
-    SET(LIBXML2_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libxml2.a)
-
-    SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
-    SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
-
-    SET(AMD_FOUND TRUE)
-    SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
-    SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
-
-    SET(UMFPACK_FOUND TRUE)
-    SET(UMFPACK_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
-    SET(UMFPACK_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libumfpack.a)
-
-    SET(CHOLMOD_FOUND TRUE)
-    SET(CHOLMOD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
-    SET(CHOLMOD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
-
-    # adding UMFPACK dependencies
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcolamd.a)
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libSuiteSparse_config.a)
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/libblas.lib) 
-    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/liblapack.lib) 
-
-    SET(UMFPACK_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}) # points to a a dir which has cmake subdir SuiteSperce cmake config files
+        SET(EIGEN3_INCLUDE_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/eigen3)
+        SET(LIBXML2_INCLUDE_DIR  ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/libxml2)
+        SET(LIBXML2_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libxml2.a)
 endif()
+
+# Get GIT changeset, if available
+# if (MINGW)
+    # SET (BOOST_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR})
+    # SET(DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR "D:/dolfin_deps_git")
+
+    # SET(EIGEN3_INCLUDE_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/eigen3)
+    # SET(LIBXML2_INCLUDE_DIR  ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/libxml2)
+    # SET(LIBXML2_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libxml2.a)
+
+    # SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    # SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+
+    # SET(AMD_FOUND TRUE)
+    # SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    # SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+
+    # SET(UMFPACK_FOUND TRUE)
+    # SET(UMFPACK_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    # SET(UMFPACK_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libumfpack.a)
+
+    # SET(CHOLMOD_FOUND TRUE)
+    # SET(CHOLMOD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    # SET(CHOLMOD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
+
+    # # adding UMFPACK dependencies
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcolamd.a)
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libSuiteSparse_config.a)
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/libblas.lib) 
+    # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/liblapack.lib) 
+
+    # SET(UMFPACK_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}) # points to a a dir which has cmake subdir SuiteSperce cmake config files
+# endif()
 
 # # # SET(EIGEN3_INCLUDE_DIR "D:/source-46/eigen-3.2.1/include/eigen3")
 # # # SET(LIBXML2_INCLUDE_DIR  "d:/source-46/libxml2-46/include/libxml2")
@@ -422,20 +433,56 @@ if (DOLFIN_ENABLE_MPI AND MPI_C_FOUND)
   endif()
 endif()
 
-# Check for UMFPACK
-# if (DOLFIN_ENABLE_UMFPACK)
-  # find_package(AMD)
-  # find_package(BLAS)
-  # find_package(UMFPACK )
-  # find_package(AMD QUIET)
-  # find_package(BLAS QUIET)
-  # find_package(UMFPACK QUIET)
-# endif()
+if (NOT MINGW)
+    # Check for UMFPACK
+    if (DOLFIN_ENABLE_UMFPACK)
+      find_package(AMD)
+      find_package(BLAS)
+      find_package(UMFPACK )
+      find_package(AMD QUIET)
+      find_package(BLAS QUIET)
+      find_package(UMFPACK QUIET)
+    endif()
 
-# Check for CHOLMOD
-# if (DOLFIN_ENABLE_CHOLMOD)
-  # find_package(CHOLMOD QUIET)
-# endif()
+    # Check for CHOLMOD
+    if (DOLFIN_ENABLE_CHOLMOD)
+      find_package(CHOLMOD QUIET)
+    endif()
+
+else()
+# for mingw we set suite sparse explicitly because otherwise profided cmake Findxxx scripts do not work
+    if (DOLFIN_ENABLE_UMFPACK)
+
+        SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+        SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+
+        SET(AMD_FOUND TRUE)
+        SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+        SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+
+        SET(UMFPACK_FOUND TRUE)
+        SET(UMFPACK_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+        SET(UMFPACK_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libumfpack.a)
+
+        # adding UMFPACK dependencies
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcolamd.a)
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libSuiteSparse_config.a)
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/libblas.lib) 
+        SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/liblapack.lib) 
+
+        SET(UMFPACK_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}) # points to a a dir which has cmake subdir SuiteSperce cmake config files
+    endif()
+    
+    if (DOLFIN_ENABLE_CHOLMOD)
+        SET(CHOLMOD_FOUND TRUE)
+        SET(CHOLMOD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+        SET(CHOLMOD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
+    endif()
+
+endif()
 
 # Check for HDF5
 if (DOLFIN_ENABLE_HDF5)
@@ -631,46 +678,114 @@ endif()
 
 #------------------------------------------------------------------------------
 # Get installation paths for Python modules (pure and platform-dependent)
+if (MINGW)
+    # setting/overriding installation path for python modules on windows with mingw
+    if (PYTHONINTERP_FOUND)
+        # on windows with mingw we install python modules not into Python directory but to dolfin install dir 
+        set(DOLFIN_INSTALL_PYTHON_MODULE_DIR ${CMAKE_INSTALL_PREFIX}/Lib/site-packages
+          CACHE PATH "Python extension module installation directory." FORCE) # putting 'FORCE' ensures that DOLFIN_INSTALL_PYTHON_MODULE_DIR is updated each time Configure runs 
+          
+        message("CMAKE_INSTALL_PREFIX= " ${CMAKE_INSTALL_PREFIX})
+        message("DOLFIN_INSTALL_PYTHON_MODULE_DIR= " ${DOLFIN_INSTALL_PYTHON_MODULE_DIR})
+        
+        # on windows with mingw we install python modules not into Python directory but to dolfin install dir 
+        set(DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR ${CMAKE_INSTALL_PREFIX}/Lib/site-packages
+          CACHE PATH "Python extension module installation directory." FORCE)
+    endif()      
+else()
+    if (PYTHONINTERP_FOUND)
+      if (NOT DEFINED DOLFIN_INSTALL_PYTHON_MODULE_DIR)
+        # Get path for platform-dependent Python modules (since we install a binary libary)
 
-if (PYTHONINTERP_FOUND)
+        # Python command string to discover module install location
+        if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+          set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=True))")
+        else()
+          set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=True, prefix='${CMAKE_INSTALL_PREFIX}'))")
+        endif()
 
-  if (NOT DEFINED DOLFIN_INSTALL_PYTHON_MODULE_DIR)
-    # Get path for platform-dependent Python modules (since we install a binary libary)
+        # Probe Python interpreter
+        execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "${PYTHON_LIB_DISCOVER_STR}"
+          OUTPUT_VARIABLE DOLFIN_INSTALL_PYTHON_MODULE_DIR
+          )
+          
+        set(DOLFIN_INSTALL_PYTHON_MODULE_DIR ${DOLFIN_INSTALL_PYTHON_MODULE_DIR}
+          CACHE PATH "Python extension module installation directory.")
+      endif()
 
-    # Python command string to discover module install location
-    if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-      set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=True))")
-    else()
-      set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=True, prefix='${CMAKE_INSTALL_PREFIX}'))")
+      if (NOT DEFINED DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR)
+        # Get path for pure Python modules
+
+        # Python command string to discover module install location
+        if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+          set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=False))")
+        else()
+          set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=False, prefix='${CMAKE_INSTALL_PREFIX}'))")
+        endif()
+
+        # Probe Pyton interpreter
+        execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "${PYTHON_LIB_DISCOVER_STR}"
+          OUTPUT_VARIABLE DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR
+          )
+        set(DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR ${DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR}
+          CACHE PATH "Python module installation directory.")
+      endif()
+          
     endif()
-
-    # Probe Python interpreter
-    execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "${PYTHON_LIB_DISCOVER_STR}"
-      OUTPUT_VARIABLE DOLFIN_INSTALL_PYTHON_MODULE_DIR
-      )
-    set(DOLFIN_INSTALL_PYTHON_MODULE_DIR ${DOLFIN_INSTALL_PYTHON_MODULE_DIR}
-      CACHE PATH "Python extension module installation directory.")
-  endif()
-
-  if (NOT DEFINED DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR)
-    # Get path for pure Python modules
-
-    # Python command string to discover module install location
-    if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-      set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=False))")
-    else()
-      set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=False, prefix='${CMAKE_INSTALL_PREFIX}'))")
-    endif()
-
-    # Probe Pyton interpreter
-    execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "${PYTHON_LIB_DISCOVER_STR}"
-      OUTPUT_VARIABLE DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR
-      )
-    set(DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR ${DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR}
-      CACHE PATH "Python module installation directory.")
-  endif()
 
 endif()
+
+# if (PYTHONINTERP_FOUND)
+  # if (NOT DEFINED DOLFIN_INSTALL_PYTHON_MODULE_DIR)
+    # # Get path for platform-dependent Python modules (since we install a binary libary)
+
+    # # Python command string to discover module install location
+    # if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+      # set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=True))")
+    # else()
+      # set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=True, prefix='${CMAKE_INSTALL_PREFIX}'))")
+    # endif()
+
+    # # Probe Python interpreter
+    # execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "${PYTHON_LIB_DISCOVER_STR}"
+      # OUTPUT_VARIABLE DOLFIN_INSTALL_PYTHON_MODULE_DIR
+      # )
+      
+    # set(DOLFIN_INSTALL_PYTHON_MODULE_DIR ${DOLFIN_INSTALL_PYTHON_MODULE_DIR}
+      # CACHE PATH "Python extension module installation directory.")
+  # endif()
+
+  # if (NOT DEFINED DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR)
+    # # Get path for pure Python modules
+
+    # # Python command string to discover module install location
+    # if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+      # set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=False))")
+    # else()
+      # set(PYTHON_LIB_DISCOVER_STR "import sys, distutils.sysconfig; sys.stdout.write(distutils.sysconfig.get_python_lib(plat_specific=False, prefix='${CMAKE_INSTALL_PREFIX}'))")
+    # endif()
+
+    # # Probe Pyton interpreter
+    # execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "${PYTHON_LIB_DISCOVER_STR}"
+      # OUTPUT_VARIABLE DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR
+      # )
+    # set(DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR ${DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR}
+      # CACHE PATH "Python module installation directory.")
+  # endif()
+      
+# endif()
+
+# # setting/overriding installation path for python momdules on windows with mingw
+# if(MINGW)
+    # # on windows with mingw we install python modules not into Python directory but to dolfin install dir 
+    # set(DOLFIN_INSTALL_PYTHON_MODULE_DIR ${CMAKE_INSTALL_PREFIX}/Lib/site-packages
+      # CACHE PATH "Python extension module installation directory.")
+
+    # # on windows with mingw we install python modules not into Python directory but to dolfin install dir 
+    # set(DOLFIN_INSTALL_PYTHON_PURE_MODULE_DIR ${CMAKE_INSTALL_PREFIX}/Lib/site-packages
+      # CACHE PATH "Python extension module installation directory.")
+
+# endif()
 
 #------------------------------------------------------------------------------
 # Installation of DOLFIN Python module
