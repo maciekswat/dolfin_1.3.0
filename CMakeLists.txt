@@ -14,36 +14,70 @@ set(DOLFIN_VERSION "${DOLFIN_VERSION_MAJOR}.${DOLFIN_VERSION_MINOR}.${DOLFIN_VER
 
 #------------------------------------------------------------------------------
 # Get GIT changeset, if available
+if (MINGW)
+    SET (BOOST_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR})
+    SET(DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR "D:/dolfin_deps_git")
 
-SET(EIGEN3_INCLUDE_DIR "D:/source-46/eigen-3.2.1/include/eigen3")
-SET(LIBXML2_INCLUDE_DIR  "d:/source-46/libxml2-46/include/libxml2")
-SET(LIBXML2_LIBRARIES "d:/source-46/libxml2-46/lib/libxml2.a")
+    SET(EIGEN3_INCLUDE_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/eigen3)
+    SET(LIBXML2_INCLUDE_DIR  ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/libxml2)
+    SET(LIBXML2_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libxml2.a)
 
-SET(AMD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
-SET(AMD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libamd.a")
+    SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
 
-SET(AMD_FOUND TRUE)
-SET(AMD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
-SET(AMD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libamd.a")
+    SET(AMD_FOUND TRUE)
+    SET(AMD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    SET(AMD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
 
-SET(UMFPACK_FOUND TRUE)
-SET(UMFPACK_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
-SET(UMFPACK_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libumfpack.a")
+    SET(UMFPACK_FOUND TRUE)
+    SET(UMFPACK_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    SET(UMFPACK_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libumfpack.a)
 
-SET(CHOLMOD_FOUND TRUE)
-SET(CHOLMOD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
-SET(CHOLMOD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libcholmod.a")
+    SET(CHOLMOD_FOUND TRUE)
+    SET(CHOLMOD_INCLUDE_DIRS ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include/suitesparse)
+    SET(CHOLMOD_LIBRARIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
 
-# adding UMFPACK dependencies
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libamd.a")
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libcholmod.a")
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libcolamd.a")
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libSuiteSparse_config.a")
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libamd.a")
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/lapack_blas_windows/libblas.lib") 
-SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/lapack_blas_windows/liblapack.lib") 
+    # adding UMFPACK dependencies
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcholmod.a)
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libcolamd.a)
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libSuiteSparse_config.a)
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/libamd.a)
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/libblas.lib) 
+    SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib/lapack_blas_windows/liblapack.lib) 
 
-SET(UMFPACK_DIR "d:/source-46/SuiteSparseProject")
+    SET(UMFPACK_DIR ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}) # points to a a dir which has cmake subdir SuiteSperce cmake config files
+endif()
+
+# # # SET(EIGEN3_INCLUDE_DIR "D:/source-46/eigen-3.2.1/include/eigen3")
+# # # SET(LIBXML2_INCLUDE_DIR  "d:/source-46/libxml2-46/include/libxml2")
+# # # SET(LIBXML2_LIBRARIES "d:/source-46/libxml2-46/lib/libxml2.a")
+
+# # # SET(AMD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+# # # SET(AMD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libamd.a")
+
+# # # SET(AMD_FOUND TRUE)
+# # # SET(AMD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+# # # SET(AMD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libamd.a")
+
+# # # SET(UMFPACK_FOUND TRUE)
+# # # SET(UMFPACK_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+# # # SET(UMFPACK_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libumfpack.a")
+
+# # # SET(CHOLMOD_FOUND TRUE)
+# # # SET(CHOLMOD_INCLUDE_DIRS "d:/source-46/SuiteSparseProject/include/suitesparse")
+# # # SET(CHOLMOD_LIBRARIES "d:/source-46/SuiteSparseProject/lib/libcholmod.a")
+
+# # # # adding UMFPACK dependencies
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libamd.a")
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libcholmod.a")
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libcolamd.a")
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libSuiteSparse_config.a")
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/libamd.a")
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/lapack_blas_windows/libblas.lib") 
+# # # SET(UMFPACK_LIBRARIES ${UMFPACK_LIBRARIES} "d:/source-46/SuiteSparseProject/lib/lapack_blas_windows/liblapack.lib") 
+
+# # # SET(UMFPACK_DIR "d:/source-46/SuiteSparseProject")
 
 
 

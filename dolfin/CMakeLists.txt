@@ -47,6 +47,7 @@ endforeach()
 #       compiler flags, in which case the path should be appended to
 #       DOLFIN_DEP_SYSTEM_INCLUDE_DIRECTORIES
 
+
 # libXml2
 list(APPEND DOLFIN_DEP_INCLUDE_DIRECTORIES ${LIBXML2_INCLUDE_DIR})
 list(APPEND DOLFIN_TARGET_LINK_LIBRARIES ${LIBXML2_LIBRARIES})
@@ -61,7 +62,7 @@ list(APPEND DOLFIN_DEP_SYSTEM_INCLUDE_DIRECTORIES ${EIGEN3_INCLUDE_DIR})
 # Boost
 list(APPEND DOLFIN_DEP_SYSTEM_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 list(APPEND DOLFIN_TARGET_LINK_LIBRARIES ${Boost_LIBRARIES})
-list(APPEND APPEND DOLFIN_TARGET_LINK_LIBRARIES_DIRS ${Boost_LIBRARY_DIRS})
+list(APPEND DOLFIN_TARGET_LINK_LIBRARIES_DIRS ${Boost_LIBRARY_DIRS})
 
 #------------------------------------------------------------------------------
 
@@ -281,6 +282,15 @@ if (DOLFIN_ENABLE_VTK AND VTK_FOUND)
 
   list(APPEND DOLFIN_TARGET_LINK_LIBRARIES ${DOLFIN_VTK_LIBRARIES})
 endif()
+
+if (MINGW)
+    # appending third part deps for dolfin
+    list(APPEND DOLFIN_DEP_INCLUDE_DIRECTORIES ${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/include)
+    LINK_DIRECTORIES(${DOLFIN_THIRD_PARTY_DEPENDENCIES_DIR}/lib)
+    list(APPEND DOLFIN_TARGET_LINK_LIBRARIES iconv)    
+    list(APPEND DOLFIN_TARGET_LINK_LIBRARIES zlib)    
+endif()
+
 
 #------------------------------------------------------------------------------
 # Set compiler flags, include directories and library dependencies
