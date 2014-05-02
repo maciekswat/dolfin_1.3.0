@@ -1,0 +1,24 @@
+<NotepadPlus>
+    <Session activeView="0">
+        <mainView activeIndex="16">
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1356" startPos="0" endPos="0" selMode="0" lang="Normal Text" encoding="-1" filename="C:\Program Files (x86)\Notepad++\change.log" />
+            <File firstVisibleLine="219" xOffset="0" scrollWidth="2052" startPos="0" endPos="0" selMode="0" lang="Makefile" encoding="-1" filename="d:\ExternalSources\lapack-3.5.0-Source_build\Makefile" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="936" startPos="777" endPos="777" selMode="0" lang="Normal Text" encoding="-1" filename="c:\MinGW\msys\1.0\etc\fstab" />
+            <File firstVisibleLine="36" xOffset="0" scrollWidth="960" startPos="2014" endPos="1966" selMode="0" lang="Normal Text" encoding="-1" filename="d:\ExternalSources\lapack-3.5.0-Source\README" />
+            <File firstVisibleLine="81" xOffset="0" scrollWidth="1452" startPos="4224" endPos="3928" selMode="0" lang="C++" encoding="-1" filename="d:\ExternalSources\trilinos-11.4.3-Source\packages\teuchos\numerics\src\Teuchos_BLAS.cpp" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1968" startPos="1115" endPos="1075" selMode="0" lang="C++" encoding="-1" filename="d:\ExternalSources\trilinos-11.4.3-Source\packages\ml\src\Utils\ml_epetra_utils.cpp" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="984" startPos="0" endPos="0" selMode="0" lang="C++" encoding="-1" filename="d:\ExternalSources\trilinos-11.4.3-Source\packages\ml\src\Utils\ml_epetra_utils.h" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="900" startPos="313" endPos="294" selMode="0" lang="Diff" encoding="-1" filename="C:\Users\m\AppData\Local\Temp\include_unistd-1.patch" />
+            <File firstVisibleLine="29" xOffset="0" scrollWidth="936" startPos="1835" endPos="1840" selMode="0" lang="C++" encoding="-1" filename="c:\MinGW\include\unistd.h" />
+            <File firstVisibleLine="104" xOffset="0" scrollWidth="1128" startPos="3039" endPos="3039" selMode="0" lang="C++" encoding="-1" filename="d:\ExternalSources\trilinos-11.4.3-Source\packages\ml\src\MLAPI\MLAPI_Workspace.cpp" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1044" startPos="0" endPos="0" selMode="0" lang="Python" encoding="-1" filename="d:\ExternalSources\ffc-1.3.0-Source\setup.py" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="828" startPos="459" endPos="437" selMode="0" lang="Normal Text" encoding="-1" filename="d:\ExternalSources\ffc-1.3.0-Source\INSTALL" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="900" startPos="26" endPos="26" selMode="0" lang="Normal Text" encoding="-1" filename="C:\Python27\Lib\distutils\distutils.cfg" />
+            <File firstVisibleLine="16" xOffset="0" scrollWidth="1248" startPos="1432" endPos="1432" selMode="0" lang="Batch" encoding="-1" filename="d:\ExternalSources\boost_1_55_0-Source\bootstrap.bat" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="948" startPos="2" endPos="2" selMode="0" lang="Normal Text" encoding="-1" filename="d:\ExternalSources\boost_1_55_0-Source\boostcpp.jam" />
+            <File firstVisibleLine="238" xOffset="0" scrollWidth="1728" startPos="9328" endPos="9331" selMode="0" lang="Cmake" encoding="-1" filename="d:\ExternalSources\dolfin-1.3.0-Source\CMakeLists.txt" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="2429" startPos="1056" endPos="1056" selMode="0" lang="Normal Text" encoding="-1" filename="D:\building dolfin.txt" />
+        </mainView>
+        <subView activeIndex="0" />
+    </Session>
+</NotepadPlus>

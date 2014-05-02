@@ -1,0 +1,265 @@
+building trilinos:
+there were some minor  modifications see notepad++ session file for details.
+
+with trilinos I built all packages
+
+
+building boost:
+
+in the regular windows console type
+
+cd <BOOST_ROOT>\tools\build\v2
+
+run bootstrap.bat mingw
+
+b2 install --prefix=PREFIX where PREFIX is the directory where you want Boost.Build to be installed
+
+add <PREFIX>\bin to PATH . It contains bjam and b2 which are preconfigured for tour boost source layout
+
+cd to to <BOOST_ROOT> and with just built bjam and b2 run the following command 
+
+b2 toolset=gcc link=static --build-type=complete stage -j 8
+
+or using this command:
+
+D:\source-46\boost_1_55_0-src> bjam toolset=gcc link=static runtime-link=static -sZLIB_INCLUDE=d:\source-46\zlib\include -sZLIB_LIBPATH=d:\source-46\zlib\lib --build-type=complete -j 8
+
+IMPORTANT: the second command specifies zlib and this is important because dolfin will use iostreams boost lib which if compiled without zlib will not link properly with dolfin. Take home messaage use second command 
+
+
+
+compilation will take place on rMBP core i7 MAC 2013 it took about 2.5 hours... if you use -j1 or 15 minutes if you use -j 8
+
+The libraries are placed in the <BOOST_ROOT>/stage directory
+
+After the compilaiton make new directory e.g. d:\ExternalSources\boost and copy <BOOST_ROOT>\stage\lib to d:\ExternalSources\boost so that the lib subdir appears right under d:\ExternalSources\boost
+
+inside d:\ExternalSources\boost make dir called include and copy there the content of <BOOST_ROOT>\boost so that boost dir appears right under d:\ExternalSources\boost\include
+
+make env var BOOST_DIR to point to d:\ExternalSources\boost
+
+IMPORTANT: make sure that debug versions are marked with -d in the name not -sd
+
+ALTERNATIVELY use this command which will create libraries with correct names - weird, boost is really weird
+
+D:\source-46\boost_1_55_0-src>b2 toolset=gcc link=static --build-type=complete stage -sZLIB_INCLUDE=d:\source-46\zlib\include -sZLIB_LIBPATH=d:\source-46\zlib\l
+ib --layout=tagged threading=multi -j 8
+
+UFC:
+
+Compile ufc 2.3.0 - even though the page says deprecated for dolfin 1.3 it should be fine
+
+In the dolfin cmake configuration set UFC_DIR to  D:/ExternalSources/ufc-2.3.0/share/ufc - Note the UFS itself was installed to D:/ExternalSources/ufc-2.3.0
+
+change all backward slashes aka escape characters inthe UFC cmake files into forward slashes
+
+latest working UFC_DIR WAS d:\source-46-2.0\ufc-2.3.0\share\ufc
+
+Eigen 3: 
+get Eigen from http://eigen.tuxfamily.org/index.php?title=Main_Page
+
+
+install eigen 3 mainly copy header files - my eigen inst dir is  d:\ExternalSources\eigen-3.2.1
+set to EIGEN3_INCLUDE_DIR in dolfin cmake to d:\ExternalSources\eigen-3.2.1\include\eigen3
+
+libxml2:
+
+Actually the first thing to do is to compile libxml2 and not rely on binary versions from internet. This way we can avoid a lot of issues during linking
+
+After unpacking libxml2 go to the <libxml2-root-src>/win32 and type
+
+cscript configure.js help to find available options
+
+To compile with mingw I use the following configure command:
+
+cscript configure.js compiler=mingw prefix=d:\source-46\libxml2-46 ftp=no http=no
+
+After that Makefile.mingw file gets generated. Notice this file assumes you will use mingw32-make so ensure you are using it and NOT make from msys
+This is the command:
+
+mingw32-make -f Makefile.mingw
+
+OK here comes the error
+
+gcc.exe -DWIN32 -D_WINDOWS -D_MBCS -DNOLIBTOOL  -I.. -I../include -Id:\source-46\libxml2-46\include -I. -D_REENTRANT -DHAVE_WIN32_THREADS -DNDEBUG -O2  -o int.m
+ingw/dict.o -c ../dict.c
+In file included from c:\mingw-4.6\bin\../lib/gcc/mingw32/4.6.2/include/stdint.h:3:0,
+                 from c:\mingw-4.6\bin\../lib/gcc/mingw32/4.6.2/../../../../include/wchar.h:617,
+                 from c:\mingw-4.6\bin\../lib/gcc/mingw32/4.6.2/../../../../include/iconv.h:111,
+                 from ../include/libxml/encoding.h:28,
+                 from ../include/libxml/parser.h:810,
+                 from ../include/libxml/globals.h:18,
+                 from ../include/libxml/threads.h:35,
+                 from ../include/libxml/xmlmemory.h:218,
+                 from ../include/libxml/tree.h:1299,
+                 from ../dict.c:55:
+c:\mingw-4.6\bin\../lib/gcc/mingw32/4.6.2/../../../../include/stdint.h:32:20: error: conflicting types for 'uint32_t'
+../dict.c:52:26: note: previous declaration of 'uint32_t' was here
+mingw32-make: *** [int.mingw/dict.o] Error 1
+
+To fix it go to dict.c and comment out line 
+typedef unsigned __int32 uint32_t;
+
+early in the file.
+
+type:
+
+mingw32-make -f Makefile.mingw
+
+
+This time simulation should finish without problems
+
+install the package in to the prefix directory
+
+mingw32-make -f Makefile.mingw install
+
+
+
+
+
+
+when installing mingw using mingw graphical installer make sure to pick libxml2 together with development files - note my mingw is in c:\mingw and msys is in c:/MinGW/msys
+
+point LIBXML2_INCLUDE_DIR to c:/MinGW/msys/1.0/include/libxml2/
+
+
+libxml2 fixes - some versions only:
+
+need to change <libxml_root>\include\libxml2\libxml\xmlexports.h
+
+to include this section 
+
+/* Windows platform with GNU compiler (Mingw) */
+#if defined(_WIN32) && defined(__MINGW32__)
+  #undef XMLPUBFUN
+  #undef XMLPUBVAR
+  #undef XMLCALL
+  #undef XMLCDECL
+  /*
+   * if defined(IN_LIBXML) this raises problems on mingw with msys
+   * _imp__xmlFree listed as missing. Try to workaround the problem
+   * by also making that declaration when compiling client code.
+   */
+  #if defined(IN_LIBXML) && !defined(LIBXML_STATIC)
+    #define XMLPUBFUN __declspec(dllexport)
+    #define XMLPUBVAR __declspec(dllexport)
+  #else
+    #define XMLPUBFUN
+    #if !defined(LIBXML_STATIC)
+      #define XMLPUBVAR __declspec(dllimport) extern
+    #else
+      #define XMLPUBVAR extern
+    #endif
+  #endif
+  #define XMLCALL __cdecl
+  #define XMLCDECL __cdecl
+  #if !defined _REENTRANT
+    #define _REENTRANT
+  #endif
+#endif
+
+the key line is 
+
+#if defined(IN_LIBXML) && !defined(LIBXML_STATIC)
+    #define XMLPUBFUN __declspec(dllexport)
+    #define XMLPUBVAR __declspec(dllexport)
+
+the  part:
+defined(IN_LIBXML) &&
+
+is essential to avoid multiple definitions error with MINGW
+
+
+IN the cmake configuration of dolfin set LIBXML2_INCLUDE_DIR to D:/source-46/libxml2-mingw-46/include/libxml2 so that forst subdirectory if it is called libxml 
+and pick static libxml2 library (LIBXML2_LIBRARIES): D:/source-46/libxml2-mingw-46/lib/libxml2.a
+
+
+zlib:
+
+it is best to compile zlib yourself - zlib comes with cmake project files so compilation is easy 
+
+after compilation you may rename libzlibstatic.a to libzlib.a and copy it to mingw lib directory to be found easily by dolfing build system
+
+NOTE: when copying zlib to dependency library make sure to copy only static library or else if you use -lzlib in the cmake/gcc then libzlib.dll.a will get picked and this might cause issues at runtime because 
+it will be expected that libzlib.dll is in the search path. In case of problems with loading .pyd  library used dependency walker to see what libs need to be in the search path
+
+ply (Python lex yacc):
+
+To be able to generate and compile swig modules the PLY package needs to be installed. This is another prerequisite not mentioned on dolfin build page
+type PLY Python in google and go to the Dave Beazley page 
+http://www.dabeaz.com/ply/
+
+After unpacking PLY go to <PLY_ROOR> and type
+python setup.py build
+python setup.py build
+
+PLY will be installed in the python directory
+
+Dolfin:
+
+change CMAKE_INSTALL_PREXIX to D:/source-46/dolfin_install
+Change CMAKE_INSTALL_PYTHON_MODULE_DIR and CMAKE_INSTALL_PYTHON_PURE_MODULE_DIR to D:/source-46/dolfin_install/Lib/site-packages
+
+
+Shared vs Static libraries:
+
+Uncheck BUILD_SHARED_LIBS if you want static dolfin libraries
+
+NOTE: building shared libraries seems to report more link errors so it is good idea have it checked before proceeding to static libraries 
+ 
+
+
+
+
+BEfore Dolfin is usable FFC, UFC, UFL, FIAT and Instant all have to be installed. Installation is straightforward though so I am not describing it here in detail . Essentially after unpacking you type:
+python setup.py build
+python setup.py install
+
+or to install them in the custom dir type
+python setup.py build
+python setup.py install --prefix=<custom_dir>
+e.g.
+python setup.py install --prefix=d:\dolfin_local_git
+
+
+FFC:
+to build ffc you need to explicitely tell which compilers you will use so the commands looks like that:
+python setup.py build -c mingw32
+python setup.py install 
+
+or if you install using custom install path:
+
+python setup.py build -c mingw32
+python setup.py install --prefix=d:\dolfin_local_git
+
+
+You also need ScientificPython (not scipy !) get it from here: http://dirac.cnrs-orleans.fr/plone/software/scientificpython/
+
+cmake:
+
+dolfin's jit uses cmake so make sure it is in path env var /  bundle it with binary package
+
+swig:
+dolfin's jit uses swig so make sure it is in path env var /  bundle it with binary package
+
+mingw:
+
+to make jit swig module compile with MSYS Makefiles generator (cmake) we need to copy libmpc-2.dll, libmpfr-1.dll and libgmp-10.dll from 
+c:\MinGW-46\bin to c:\MinGW-46\libexec\gcc\mingw32\4.6.2 to deal with cc1.exe missing library error
+
+dolfin:
+
+add (around line 415)
+
+set(PYTHON_INCLUDE_DIRS "c:/Python27/include")
+set(NUMPY_INCLUDE_DIR "c:/Python27/lib/site-packages/numpy/core/include")
+
+to <dolfin_src_root>/dolfin/CMAkeLists.txt
+
+for some reason backslashes in path appear in the generated file - need to find better way of fixing it
+
+linking you may get link errors so make sure to include 
+-liconv and -lzlib in the CMAKE_CXX_STANDARD_LIBRARIES and CMAKE_C_STANDARD_LIBRARIES
+
+
+
