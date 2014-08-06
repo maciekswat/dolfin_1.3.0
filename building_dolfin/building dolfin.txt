@@ -261,5 +261,11 @@ for some reason backslashes in path appear in the generated file - need to find 
 linking you may get link errors so make sure to include 
 -liconv and -lzlib in the CMAKE_CXX_STANDARD_LIBRARIES and CMAKE_C_STANDARD_LIBRARIES
 
+to compile type:
+mingw32-make (if using mingw32 makefiles)
+
+or 
+make (when using "regular" make)
+
 
 
